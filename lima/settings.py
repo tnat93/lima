@@ -50,9 +50,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'thinkster_django_angular_boilerplate.urls'
+ROOT_URLCONF = 'lima.urls'
 
-WSGI_APPLICATION = 'thinkster_django_angular_boilerplate.wsgi.application'
+WSGI_APPLICATION = 'lima.wsgi.application'
 
 
 # Database

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from thinkster_django_angular_boilerplate.views import IndexView
+from lima.views import IndexView
 
 urlpatterns = patterns(
     '',

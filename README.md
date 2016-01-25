@@ -1,15 +1,14 @@
-# thinkster-django-angular-boilerplate
+# LIMA
 
-## Installation
+## Setup
 
-*NOTE: Requires [virtualenv](http://virtualenv.readthedocs.org/en/latest/),
-[virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/) and
+*NOTE: Requires [virtualenv](http://virtualenv.readthedocs.org/en/latest/) and
 [Node.js](http://nodejs.org/).*
 
 * Fork this repository.
-* `$ git clone git@github.com:<your username>/thinkster-django-angular-boilerplate.git`
-* `$ mkvirtualenv thinkster-djangular`
-* `$ cd thinkster-django-angular-boilerplate/`
+* `$ git clone git@github.com/<GitHub-username>/lima.git`
+* `$ virtualenv venv`
+* `$ source venv/bin/activate`
 * `$ pip install -r requirements.txt`
 * `$ npm install -g bower`
 * `$ npm install`
