@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="lima">
+<head>
+  <title>Lima</title>
+
+  <base href="/" />
+
+  {% include 'stylesheets.html' %}
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 ng-view"></div>
+    </div>
+  </div>
+
+  {% include 'javascripts.html' %}
+</body>
+</html>
+
+<!-- {% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %}Welcome | {% endblock %}
+
+<style>
+{% block style %}
+.jumbotron{
+  background-color: #FFF;
+}
+
+
+{% endblock %}
+</style>
+
+{% block jumbotron %} -->
+<!-- Main component for a primary marketing message or call to action -->
+<!-- <div class="jumbotron">
+  <div class="row">
+    <div class='col-sm-6'>
+      <h1>Location Inference and Mapping Analytics.</h1>
+      <p>A data-driven platform for customer service and marketing teams.</p>
+      <p>
+        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Try it out! &raquo;</a>
+      </p>
+    </div>
+    <div class='col-sm-6'>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/SaIegdJxTsE" frameborder="0" allowfullscreen></iframe></div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+
+  <div class="col-xs-3 pull-right">
+    <p>{{ title }}</p>
+
+    <form method='POST' action=''>{% csrf_token %}
+      {{ form|crispy }}
+      <input class='btn btn-primary' type="submit" value='Sign Up' />
+
+    </form>
+  </div>
+  <div class='col-sm-4'>
+    <p class='lead text-align-center'>Built with Django &amp; Bootstrap.
+    </br>
+      <i class="fa fa-bolt fa-5x"></i></p> -->
+
+    <!-- <img src='{% static "" %}' class='img-responsive'/> -->
+  <!-- </div>
+</div>
+{% endblock %} -->
