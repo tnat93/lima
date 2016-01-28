@@ -4,6 +4,9 @@ from django.utils.decorators import method_decorator
 
 
 class IndexView(TemplateView):
+    """
+    @docs
+    """
     template_name = 'index.html'
 
     @method_decorator(ensure_csrf_cookie)
