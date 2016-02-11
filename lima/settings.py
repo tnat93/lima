@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import dj_database_url
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+from pymongo import MongoClient
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -27,7 +28,6 @@ DEBUG = os.environ.get('DEBUG', True)
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -57,7 +57,6 @@ ROOT_URLCONF = 'lima.urls'
 
 WSGI_APPLICATION = 'lima.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
@@ -79,7 +78,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -114,3 +112,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+# MongoDB Setup
+CLIENT = MongoClient('localhost', 27017)
+TRAINING_SET_DB = CLIENT.training_set
+
+# Application Server Constants
+APPLICATION_SERVER_HOST = ''
+APPLICATION_SERVER_PORT = '8999'
