@@ -15,3 +15,8 @@ dist/
 
 # Staticfiles
 staticfiles/
+
+# Virtual Environment
+venv/
+
+.idea/workspace.xml
