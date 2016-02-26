@@ -1,0 +1,9 @@
+<form name="search_form" role="form" method="POST" id="Search">
+  <div class="input-group input-group-search">
+    <input type="text" class="form-control" ng-model="blab" name="q" placeholder="Enter a search item" required>
+    <center>
+      <button class="btn btn-primary" ng-click="search.submitSearch(blab)">Search</button>
+      <button class="btn btn-primary" ng-click="blab = ''">Clear</button>
+    </center>
+    </div>
+  </form>
