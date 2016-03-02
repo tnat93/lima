@@ -36,8 +36,11 @@ def maps(request):
     Returns: { 'coordinates', 'LIMA score', 'color' }
     """
     if request.method == 'POST':
+        print "I'm here dude"
+        print request
         get_stream = request.POST.get('stream')
         keywords = request.POST.get('keywords')
+        print get_stream + ' ' + keywords
         if get_stream:
             # TODO: Error check to see if stream is already started with same user
             print "Starting real-time stream"
@@ -68,12 +71,7 @@ def maps(request):
         geo_america = TRAINING_SET_DB.geo_america
         resp_data = geo_america.find_one()
 
-        print keywords
-
-        return HttpResponse(json.dumps(resp_data),
-                            content_type='application/json')
-
-    return HttpResponse(json.dumps({'error': True}),
+    return HttpResponse({json.dumps({'worked': 'yes'})},
                         content_type='application/json')
 
 
