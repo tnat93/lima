@@ -1,7 +1,7 @@
 import socket
 
 
-def connect_to_application(host, port, keywords):
+def connect_to_application(host, port, keywords, status):
     send_keywords = ','.join(keywords)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((host, port))
@@ -10,3 +10,8 @@ def connect_to_application(host, port, keywords):
     received = s.recv(1024)
     s.close()
     print 'Received', repr(received)
+
+    if received:
+        status = True
+
+    return
