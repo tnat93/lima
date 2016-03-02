@@ -36,8 +36,7 @@
 
         function success(data, status, headers, config) {
             console.log("i made it mom");
-            
-            Search.arrSearchResults = data;
+
         }
 
         function error(data, status, headers, config) {
