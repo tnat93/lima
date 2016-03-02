@@ -1,12 +1,32 @@
-(function(angular){
+(function(){
   'use strict';
-  angular
-    .module('lima', []);
-    .controller('searchCtrl', ['$scope', function($scope){
-      $scope.keyword = "Testing";
 
-      $scope.display = function() {
-        $scope.result = $scope.keyword + "1, 2, 3";
-      };
-    }]);
-});
+  angular
+    .module('lima', [
+      'lima.controller',
+      'lima.routes',
+      'lima.maps',
+      'lima.config'
+    ]);
+
+    angular
+      .module('lima.config', []);
+
+    angular
+      .module('lima.routes', ['ngRoute']);
+
+    angular
+      .module('lima.controller', []);
+
+    angular
+      .module('lima')
+      .run(run);
+
+    run.$inject = ['$http'];
+
+    function run($http) {
+      $http.defaults.xsrfHeaderName = 'X-CSRFToken';
+      $http.defaults.xsrfCookieName = 'csrftoken';
+    };
+
+})();
