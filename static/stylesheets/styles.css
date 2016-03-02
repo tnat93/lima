@@ -4,7 +4,7 @@ form {
   margin-top: 200px;
 }
 
-.btn {
+.btn-primary:not(.btn-link):not(.btn-flat) {
 	background-color: #000;
 }
 

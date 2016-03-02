@@ -11,9 +11,8 @@
       $routeProvider.when('/',{
         controller: 'searchCtrl',
         // controllerAs: 'vm',
-        templateUrl: '/static/templates/search.html'
-      }).when('/maps',{
-        templateUrl: '/static/templates/map.html'
+        templateUrl: '/static/templates/search.html',
+        reloadOnSearch: false
       }).otherwise('/');
     }
 })();

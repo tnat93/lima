@@ -10,7 +10,8 @@
     function Search($location,$http) {
 
       var Search = {};
-      // Search.arrSearchResults = [];
+      Search.arrSearchResults = [];
+
       // Search.searchTerm = "";
 
       Search.clearSearch = function () {
@@ -35,7 +36,8 @@
 
         function success(data, status, headers, config) {
             console.log("i made it mom");
-            $location.url('/api/v1/maps');
+            
+            Search.arrSearchResults = data;
         }
 
         function error(data, status, headers, config) {

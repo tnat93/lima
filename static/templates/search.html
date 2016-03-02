@@ -1,4 +1,4 @@
-<form name="search_form" role="form" method="POST" id="Search">
+<form name="search_form" role="form" method="POST" id="Search" ng-hide="search_form.$submitted" ng-submit="search.submitSearch()">
   <div class="input-group input-group-search">
     <input type="text" class="form-control" ng-model="blab" name="q" placeholder="Enter a search item" required>
     <center>
