@@ -5,7 +5,7 @@ import sys
 from application import connect_to_application
 from dateutil.parser import parse
 from django.http import HttpResponse
-from lima.settings import APPLICATION_SERVER_HOST, \
+from lima.settings import TRAINING_SET_DB, APPLICATION_SERVER_HOST, \
     APPLICATION_SERVER_PORT
 from threading import Thread
 
@@ -63,14 +63,14 @@ def maps(request):
         end_date = parse(request.POST.get('end_date'))
 
         # TODO: Gather location & LIMA score from DB within this range
-        # date_filter = {'created_at', {'$gte': start_date, '$lt': end_date}}
-        #
-        # geo_america = TRAINING_SET_DB.geo_america
-        # resp_data = geo_america.find_one()
-        #
-        # print keywords
+        date_filter = {'created_at', {'$gte': start_date, '$lt': end_date}}
 
-        return HttpResponse({json.dumps({'worked': 'yes'})},
+        geo_america = TRAINING_SET_DB.geo_america
+        resp_data = geo_america.find_one()
+
+        print keywords
+
+        return HttpResponse(json.dumps(resp_data),
                             content_type='application/json')
 
     return HttpResponse(json.dumps({'error': True}),
