@@ -9,16 +9,10 @@
 
     function Search($location,$http) {
 
-      var Search = {};
-      Search.arrSearchResults = [];
-
+      // var Search = {};
+      // Search.arrSearchResults = [];
       // Search.searchTerm = "";
 
-      Search.clearSearch = function () {
-        console.log("ahhhh");
-        delete Search.searchTerm;
-        Search.arrSearchResults = [];
-      };
 
       Search.submitSearch = function(keyword) {
         // $location.search('q', keyword);
