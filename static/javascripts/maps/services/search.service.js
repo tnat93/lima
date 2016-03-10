@@ -30,6 +30,7 @@
 
         function success(data, status, headers, config) {
             console.log("i made it mom");
+            Search.template = "/static/templates/map.html";
 
         }
 
