@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      html, body {
-        height: 100%;
-        width: 100%;
-      }
-      #map {
-        height: 500px;
-        width: 100%;
-        margin-top: auto;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <script>
+<div id="map"></div>
+<script>
+  function initMap() {
+    console.log("am i here yet?")
+    var mapDiv = document.getElementById('map');
+    var map = new google.maps.Map(mapDiv, {
+      center: {lat: 37.09024, lng: -95.712891},
+      zoom: 4
+    });
 
-      function initMap() {
-        var mapDiv = document.getElementById('map');
-        var map = new google.maps.Map(mapDiv, {
-          center: {lat: 37.09024, lng: -95.712891},
-          zoom: 4
-        });
+    var marker = new google.maps.Marker({
+      position: {lat: 37.773972, lng: -122.431297},
+      map: map,
+      title: 'Click to zoom'
+    });
+  }
 
-        var marker = new google.maps.Marker({
-          position: {lat: 37.773972, lng: -122.431297},
-          map: map,
-          title: 'Click to zoom'
-        });
-      }
-
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap">
-    </script>
-  </body>
-</html>
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2_mHJ-X0M2GHQHVOew0URYiMXz0VIxq0&callback=initMap()"
+type="text/javascript"></script>

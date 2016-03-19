@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import dj_database_url
 
+from pusher import Pusher
 from pymongo import MongoClient
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -108,21 +109,24 @@ REST_FRAMEWORK = {
 }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
 # MongoDB Setup
 CLIENT = MongoClient('localhost', 27017)
-TRAINING_SET_DB = CLIENT.training_set
-
-# Application Server Constants
-APPLICATION_SERVER_HOST = ''
-APPLICATION_SERVER_PORT = '8999'
+TRAINING_SET_DB = CLIENT.test
 
 # Twitter Application Setup
 CONSUMER_KEY = 'QtAh3vSjkQdniyobrxF6armTa'
 CONSUMER_SECRET = 'latUsH07Pz5W7jyp40URwlkNTBnzByX9H8VctaHbP4siDqhjsU'
 ACCESS_TOKEN = '434673129-KAErcwnbmgG2usXPtpxihipjOl0HyTK8Z9T20tFO'
 ACCESS_TOKEN_SECRET = 'oATFryF61579GFKyx2TojscOrUCz4SoDOiAZLkhkrA76f'
+
+# Pusher App IDs
+PUSHER_APP_ID = '138191'
+PUSHER_KEY = 'b87e84a0194862d39bdd'
+PUSHER_SECRET = '8fd41c3b939712649fbc'
+PUSHER = Pusher(app_id=PUSHER_APP_ID, key=PUSHER_KEY, secret=PUSHER_SECRET,
+                ssl=True)

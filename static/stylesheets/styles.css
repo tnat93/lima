@@ -1,7 +1,6 @@
 form {
 	width: 300px;
-	margin: 0 auto;
-  margin-top: 200px;
+    margin: 200px auto 0;
 }
 
 .btn-primary:not(.btn-link):not(.btn-flat) {
@@ -9,6 +8,11 @@ form {
 }
 
 .navbar {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   background-color: #000;
+}
+
+#map {
+    height: 1000px;
+    width: 100%;
 }
