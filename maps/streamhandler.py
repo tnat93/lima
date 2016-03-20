@@ -1,3 +1,8 @@
+"""
+    Asynchronous Twitter Stream Class
+    Background process that streams all tweets from continental America,
+    infers location, provides lima score, and stores them in the 'stream_buffer' collection
+"""
 import os
 import sys
 
@@ -21,20 +26,11 @@ class ApplicationStream(StreamListener):
     def on_data(self, raw_data):
         # TODO: Perform location inference and sentiment analysis scoring, then write to file.
         data = loads(raw_data)
+        if 'coordinates' not in data:
+            print 'pass it through both algorithms'
         text = data['text'].encode('ascii', 'ignore').lower()
         tweet_data = {'id': data['id'], 'text': text}
         print text
-        data_list = []
-        if not os.path.isfile('tweet_data.json'):
-            data_list.append(tweet_data)
-            with open('tweet_data.json', 'w') as outfile:
-                outfile.write(dumps(data_list, indent=3))
-        else:
-            with open('tweet_data.json') as feed:
-                feeds = load(feed)
-            feeds.append(tweet_data)
-            with open('tweet_data.json', 'w') as outfile:
-                outfile.write(dumps(feeds, indent=3))
 
 
 if __name__ == '__main__':

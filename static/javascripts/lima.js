@@ -16,7 +16,7 @@
       .module('lima.routes', ['ngRoute']);
 
     angular
-      .module('lima.controller', []);
+      .module('lima.controller', ['pusher-angular']);
 
     angular
       .module('lima')

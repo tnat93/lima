@@ -26,6 +26,8 @@ def get_live_tweets_thread(keywords):
         print 'There\'s nothing in the stream for you'
         return
 
+    print stream_collection.index_information()
+
     while True:
         print 'Gathering data with keywords: ', keywords
         sleep(1)
@@ -36,6 +38,7 @@ def get_live_tweets_thread(keywords):
         stream_buffer = []
         for tweet in tweet_buffer:
             time_ms = int(tweet['timestamp_ms'])
+            print tweet['text']
             if time_ms > current_time_ms:
                 stream_buffer.append(tweet)
             else:
