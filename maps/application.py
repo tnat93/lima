@@ -6,7 +6,6 @@ import json
 
 from bson import json_util
 from lima.settings import TRAINING_SET_DB, PUSHER
-from pymongo import DESCENDING
 from time import sleep, time
 
 DEBUG_COLL = 'geo_america'
@@ -26,21 +25,23 @@ def get_live_tweets_thread(keywords):
         print 'There\'s nothing in the stream for you'
         return
 
-    print stream_collection.index_information()
-
     while True:
         print 'Gathering data with keywords: ', keywords
         sleep(1)
         tweet_buffer = stream_collection.find(
-            {'$text': {'$search': keywords}}).sort(
-            'timestamp_ms', DESCENDING)
+            {'$text': {'$search': keywords}})
         current_time_ms = int(round(time() * 1000))
+        previous_hour_ms = current_time_ms - 3600000
         stream_buffer = []
         for tweet in tweet_buffer:
             time_ms = int(tweet['timestamp_ms'])
             print tweet['text']
-            if time_ms > current_time_ms:
-                stream_buffer.append(tweet)
+            if time_ms > previous_hour_ms:
+                if tweet['sent'] == 0:
+                    tweet['sent'] = 1
+                    stream_buffer.append(tweet)
+                else:
+                    stream_collection.delete_one({'_id': tweet['_id']})
             else:
                 break
         data = {'timestamp': current_time_ms, 'data': stream_buffer}
