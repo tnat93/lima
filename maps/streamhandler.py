@@ -15,7 +15,7 @@ from json import loads
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pymongo import MongoClient, DESCENDING, TEXT
 from threading import Thread, ThreadError
-from time import sleep
+from time import sleep, time
 from tweepy import API, StreamListener, streaming, OAuthHandler
 
 CONSUMER_KEY = 'QtAh3vSjkQdniyobrxF6armTa'
@@ -46,16 +46,20 @@ class ApplicationStream(StreamListener):
 
     def on_data(self, raw_data):
         tweet = loads(raw_data)
-        if not tweet['retweeted'] and 'RT @' not in tweet['text']:
-            if 'coordinates' not in tweet:
-                print 'needs location inference'
+        try:
             text = tweet['text']
-            sentiment_analyzer = SentimentIntensityAnalyzer()
-            sentiment_score = sentiment_analyzer.polarity_scores(text=text)['compound']
-            tweet['sentiment'] = sentiment_score
-            tweet['sent'] = 0
-            # print text, ': ', str(sentiment_score)
-            STREAM_BUFFER.insert(tweet)
+            if tweet.get('retweeted_status') is None and 'RT @' not in text:
+                if 'coordinates' not in tweet:
+                    print 'needs location inference'
+                sentiment_analyzer = SentimentIntensityAnalyzer()
+                sentiment_score = sentiment_analyzer.polarity_scores(text=text)['compound']
+                tweet['sentiment'] = sentiment_score
+                current_time_ms = int(round(time() * 1000))
+                tweet['time_inserted'] = current_time_ms
+                print text, ': ', str(sentiment_score)
+                STREAM_BUFFER.insert(tweet)
+        except KeyError, v:
+            print 'KeyError: ', v
 
 
 def reindex_thread():
@@ -71,7 +75,7 @@ def reindex_thread():
         if len(indexes) == 1:
             print 'Creating \'text\' and \'timestamp_ms\' indexes..'
             STREAM_BUFFER.create_index(
-                [('text', TEXT), ('timestamp_ms', DESCENDING)],
+                [('text', TEXT), ('time_inserted', DESCENDING)],
                 background=True)
         else:
             print 'Reindexing'

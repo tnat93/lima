@@ -14,7 +14,7 @@
     pusher.subscribe('lima');
     pusher.bind('tweet_stream',
       function(data) {
-        console.log(data.timestamp);
+        console.log(data.data.text);
       });
      $scope.blab = "";
   }
