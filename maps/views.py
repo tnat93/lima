@@ -1,21 +1,17 @@
 import json
-import thread
 
 import sys
 
-from application import connect_to_application
+from application import get_live_tweets_thread
 from dateutil.parser import parse
 from django.http import HttpResponse
-from lima.settings import APPLICATION_SERVER_HOST, \
-    APPLICATION_SERVER_PORT
+from lima.settings import TRAINING_SET_DB
+from threading import Thread, ThreadError
 
 """
  TODO: Instead of models, we use pymongo and the config can be handled
  somewhere else
 """
-
-
-# TODO: Integrate Spark tasks.
 
 
 # Create your views here.
@@ -36,38 +32,32 @@ def maps(request):
     Returns: { 'coordinates', 'LIMA score', 'color' }
     """
     if request.method == 'POST':
-        print "I'm here dude"
-        print request
         get_stream = request.POST.get('stream')
         keywords = request.POST.get('keywords')
-        print get_stream + ' ' + keywords
+        print keywords
         if get_stream:
-            # TODO: Error check to see if stream is already started with same user
             print "Starting real-time stream"
-            # Send signal to stream handler to instantiate websocket connection
-            # and begin streaming data.
             try:
-                thread.start_new_thread(connect_to_application, (
-                    APPLICATION_SERVER_HOST, APPLICATION_SERVER_PORT, keywords))
-            except:
-                print >> sys.stderr, "Could not start thread"
-            return HttpResponse(json.dumps({}), content_type='application/json')
-        start_date = parse(request.POST.get('start_date'))
-        end_date = parse(request.POST.get('end_date'))
+                thread = Thread(target=get_live_tweets_thread, args=(keywords,))
+                thread.daemon = True
+                thread.start()
+            except ThreadError:
+                print 'Something went horribly wrong with this thread mate'
+            response = {'sup': 'brah'}
+            print response['sup']
+            return HttpResponse(json.dumps(response),
+                                content_type='application/json')
+            # start_date = parse(request.POST.get('start_date'))
+            # end_date = parse(request.POST.get('end_date'))
 
-        # TODO: Gather location & LIMA score from DB within this range
-        # date_filter = {'created_at', {'$gte': start_date, '$lt': end_date}}
-        #
-        # geo_america = TRAINING_SET_DB.geo_america
-        # resp_data = geo_america.find_one()
-        #
-        # print keywords
+            # TODO: Gather location & LIMA score from DB within this range
+            # date_filter = {'created_at', {'$gte': start_date, '$lt': end_date}}
+
+            # geo_america = TRAINING_SET_DB.geo_america
+            # resp_data = geo_america.find_one()
 
     return HttpResponse({json.dumps({'worked': 'yes'})},
-                            content_type='application/json')
-
-    # return HttpResponse(json.dumps({'error': True}),
-    #                     content_type='application/json')
+                        content_type='application/json')
 
 
 def stats(request):
