@@ -9,14 +9,7 @@
 
     function Search($location,$http) {
 
-      // var Search = {};
-      // Search.arrSearchResults = [];
-      // Search.searchTerm = "";
-
-
       Search.submitSearch = function(keyword) {
-        // $location.search('q', keyword);
-        // Search.searchTerm = keyword;
 
         return $http.post('/api/v1/maps', $.param({
           stream: true,
